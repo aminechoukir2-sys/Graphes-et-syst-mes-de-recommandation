@@ -1,0 +1,69 @@
+STDOUT:
+===== PROJET M1 DATA : GRAPHES ET RECOMMANDATION =====
+
+Configuration
+ProjectConfig(n_users=500, n_movies=200, n_ratings=10000, test_ratio=0.2, random_state=42, top_k=5, max_eval_users=50, traversal_max_depth=3, traversal_max_visited_nodes=300, max_candidate_movies=100, pagerank_damping=0.85, pagerank_max_iter=20, pagerank_tolerance=1e-06, random_walk_steps=1500, random_walk_restart_probability=0.15, data_dir='data')
+
+Dataset
+Utilisateurs demandés : 500
+Films demandés : 200
+Notes générées : 10000
+Train : 8000
+Test : 2000
+Utilisateurs présents : 500
+Films présents : 200
+
+Graphe
+Nombre de noeuds : 700
+Nombre d'arêtes train : 8000
+
+Complexité théorique
+                   method  ...                                              role
+0      Graph construction  ...                   Construire la liste d'adjacence
+1                     BFS  ...    Explorer par niveaux et proposer des candidats
+2                     DFS  ...  Explorer en profondeur et proposer des candidats
+3                PageRank  ...         Scorer les films par propagation de score
+4             Random Walk  ...          Scorer les films par fréquence de visite
+5  Precision@K / Recall@K  ...                       Évaluer les recommandations
+
+[6 rows x 4 columns]
+
+Évaluation BFS/DFS comme générateurs de candidats
+  provider  ...  n_users_evaluated
+0      bfs  ...                 50
+1      dfs  ...                 50
+
+[2 rows x 6 columns]
+
+Évaluation des méthodes de recommandation
+              method  precision_at_k  ...  avg_time_ms  n_users_evaluated
+0     pagerank_alone           0.280  ...    25.673065                 50
+1  random_walk_alone           0.200  ...    49.111642                 50
+2       pagerank_bfs           0.416  ...    46.410532                 50
+
+[3 rows x 6 columns]
+
+Méthodes comparées :
+- pagerank_alone
+- random_walk_alone
+- pagerank_bfs
+
+Lecture :
+- Precision@K : qualité du top K
+- Recall@K : capacité à retrouver les bons films cachés
+- F1@K : équilibre précision/rappel
+- avg_time_ms : temps moyen par utilisateur
+- candidate_recall : qualité de BFS/DFS pour retrouver des candidats pertinents
+
+
+STDERR:
+Spreadsheet runtime warmup failed during python startup
+Traceback (most recent call last):
+  File "/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
+  File "/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
+  File "/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/spreadsheet_warmup.py", line 720, in _warm_feature_flows
+  File "/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/spreadsheet_warmup.py", line 704, in _warm_collaboration_flows
+  File "/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/generated/interface/models.py", line 30820, in hydrate_crdt_from_proto
+  File "/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/rpc/remote.py", line 749, in __call__
+  File "/tmp/tmp.yTcnQsZYiA/artifact_tool_v2-2.8.4/artifact_tool/rpc/client.py", line 150, in call
+artifact_tool.rpc.client.RemoteError: hydrateCrdtFromProto requires an empty collaborative document.

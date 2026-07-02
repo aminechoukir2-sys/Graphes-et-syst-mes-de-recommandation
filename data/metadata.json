@@ -1,0 +1,8 @@
+{
+  "n_users": 500,
+  "n_movies": 200,
+  "n_ratings": 10000,
+  "test_ratio": 0.2,
+  "random_state": 42,
+  "generator_version": "v5_stable_exact_ratings"
+}
